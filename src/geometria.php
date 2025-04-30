@@ -1,6 +1,6 @@
 <?php
 
-namespace isadoratorres;
+namespace isadora;
 
 class geometria {
     public function calcularAreaRetangulo(float $base, float $altura): float {
