@@ -34,4 +34,30 @@ $app->post('/triangulo', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/retangulo', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+    $base = (float)($data['base'] ?? 0);
+    $altura = (float)($data['altura'] ?? 0);
+    
+    $geometria = new geometria();
+    $area = $geometria->calcularAreaRetangulo($base, $altura);
+    
+    $response->getBody()->write(json_encode(['area' => $area]));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Rota para calcular área do triângulo
+$app->get('/triangulo', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+    $base = (float)($data['base'] ?? 0);
+    $altura = (float)($data['altura'] ?? 0);
+    
+    $geometria = new geometria();
+    $area = $geometria->calcularAreaTriangulo($base, $altura);
+    
+    $response->getBody()->write(json_encode(['area' => $area]));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+
 $app->run();
